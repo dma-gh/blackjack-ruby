@@ -20,4 +20,14 @@ suits.each do |suit|
 end
 
 #Implements Fisher-Yates Shuffle
-cards.shuffle
+cards = cards.shuffle
+
+5.times do |index|
+	#The array is shuffled, so this gives cards 0-4 to the dealer,
+	#and 5-9 to the player
+	dealer_hand.push cards[index]
+	player_hand.push cards[index + 6]
+end
+
+
+
