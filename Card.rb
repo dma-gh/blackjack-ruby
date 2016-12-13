@@ -1,12 +1,20 @@
 class Card
-	def initialize(number, suit)
+	def initialize(number, suit, face)
 		@number = number
-		@suit = suit		
+		@suit = suit
+		@face = face		
 	end
 
-	def print
-		puts @suit
-		puts @number
+	def disp
+		return "#{@face} of #{@suit} (#{number})"
+	end
+
+	def number
+		return @number.to_i
+	end
+
+	def face
+		return @face
 	end
 end
 
