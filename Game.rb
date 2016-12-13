@@ -8,6 +8,9 @@ victor = ""
 dealer_hand = Hand.new
 player_hand = Hand.new
 
+player_money = 20
+player_bet = 0
+
 suits.each do |suit|
 	13.times do |digit|
 		digit = digit + 1
@@ -33,6 +36,19 @@ cards.shuffle!
 #dealer plays. This gives a large house advantage, thus this game follows the
 #traditional rules
 while cards.length > 0
+
+	if victor.eql? "Player" then
+		player_money += (player_bet * 2)
+	end
+
+	puts "New Game!"
+
+	puts "You have $#{player_money}"
+	if player_money < 0 then puts "You're in debt due to gambling! Stick to the computer!" end
+	puts "What would you like to bet this round?"
+
+	player_bet = gets.chomp.to_i
+	player_money -= player_bet
 
 	unless victor.empty? then puts "#{victor} wins!" end
 	victor = ""
@@ -67,28 +83,43 @@ while cards.length > 0
 			while dealer_hand.sum < player_hand.sum
 				dealer_hand.add cards.shuffle!.pop
 
+				puts "\nThe dealer is holding"
+                		dealer_hand.disp
+
+                		puts "\nYou are holding: "
+                		player_hand.disp
+
 				if dealer_hand.sum > 21 then
 					victor = "Player" 
 				end
+			end
+
+			#The player chose to stand, beyond a final check for player>21,
+			#this is the game ultimatum
+			if player_hand.sum > dealer_hand.sum then
+				victor = "Player"
+			else
+				victor = "Dealer"
 			end
 		end
 
 		if player_hand.sum > 21 then
 			victor = "Dealer"
-		end
-
-		unless action.chop.eql? "2" then
-			dealer_hand.add cards.shuffle!.pop
-
-			if dealer_hand.sum > 21 then
-				victor = "Player"
-			end
 
 			puts "\nThe dealer is holding"
-			dealer_hand.disp
+                	dealer_hand.disp
 
-			puts "\nYou are holding: "
-			player_hand.disp
+                	puts "\nYou are holding: "
+                	player_hand.disp
+
+		elsif dealer_hand.sum > 21
+			victor = "Player"
+
+	                puts "\nThe dealer is holding"
+        	        dealer_hand.disp
+
+                	puts "\nYou are holding: "
+               		player_hand.disp
 		end
 	end
 end
