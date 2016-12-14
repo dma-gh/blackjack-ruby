@@ -11,7 +11,11 @@ class Card
 
 	def disp
 		#States the card in a pretty way
-		return "#{@face} of #{@suit} (#{number})"
+		unless @number.eql? 1
+			return "#{@face} of #{@suit} (#{number})"
+		else
+			return "#{@face} of #{@suit}"
+		end
 	end
 
 	def number

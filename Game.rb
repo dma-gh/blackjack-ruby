@@ -24,7 +24,7 @@ suits.each do |suit|
 		face = digit
 
 		#Sets special faces
-		if digit.eql? 1 then face = "Ace" end
+		if digit.eql? 1 then face = "Ace (1 | 11)" end
 		if digit.eql? 11 then face = "Jack" end
 		if digit.eql? 12 then face = "Queen" end		
 		if digit.eql? 13 then face = "King" end

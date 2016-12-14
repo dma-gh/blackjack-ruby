@@ -6,14 +6,22 @@ class Hand
 	def initialize
 	end
 
-	#gets the total of the card values, lot's of DRY with this
+	#gets the total of the card values, lots of DRY with this
 	def sum
 		#sets sum at 0
-		sum = 0
-		
+		sum = 0		
+
 		#adds each card to the sum
 		@hand_contents.each do |card|
 			sum += card.number
+		end
+
+		@hand_contents.each do |card|
+			if card.number.eql? 1 then
+				if sum + 10 <= 21 then
+					sum += 10
+				end
+			end
 		end
 
 		#return the sum		
@@ -40,5 +48,7 @@ class Hand
 		@hand_contents.each do |card|
 			puts card.disp
 		end
+
+		puts "Total: #{self.sum}"
 	end
 end
